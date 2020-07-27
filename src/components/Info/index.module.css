@@ -1,0 +1,50 @@
+.status {
+  border: 3px solid #eee;
+  border-radius: 5px;
+}
+
+.robot {
+  max-width: 400px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  background-color: white;
+  height: 30px;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+.robot:hover {
+  height: 190px;
+}
+.robotName {
+  font-size: 16px;
+  margin: 5px 5px 0 5px;
+  border-bottom: 1px solid #eee;
+  display: block;
+  text-align: center;
+}
+.robotInfo {
+  margin: 10px;
+}
+.charge {
+}
+.lastActivity {
+}
+.case {
+  background: #eee;
+  padding: 5px 10px;
+}
+.orderInfo {
+  display: block;
+  text-align: center;
+}
+.caseInfo {
+  background: white;
+  padding: 5px 10px;
+}
+.caseTitle {
+}
+.caseTable {
+}
+.description {
+}
