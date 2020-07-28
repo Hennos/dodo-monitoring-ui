@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import L from 'leaflet';
 import { Map as LeafletMap, ImageOverlay, LayersControl } from 'react-leaflet';
 
@@ -7,15 +7,7 @@ import './index.css';
 // import Info from '../Info';
 import EditingControl from '../EditingControl';
 import EditingLayer from '../EditingLayer';
-import LayerTables from '../LayerTables';
-
-const layers = { TABLES: '1' };
-const mapLayers = [
-  {
-    id: layers.TABLES,
-    component: key => <LayerTables key={key} />
-  }
-];
+import ViewLayers from '../ViewLayers';
 
 // #region Transformation & CRS
 function getFloorPlanTransformation({ sizeRobotMap, sizeFloorPlan, pixelMeterRobotMap }) {
@@ -81,11 +73,6 @@ const Map = () => {
 
   const floorCenter = sizeFloorPlan.divideBy(2);
 
-  const listLayers = useMemo(
-    () => mapLayers.filter(({ id }) => id !== editing).map(({ id, component }) => component(id)),
-    [editing]
-  );
-
   const { BaseLayer } = LayersControl;
   return (
     <LeafletMap
@@ -114,7 +101,7 @@ const Map = () => {
       {/* <Info className="info" /> */}
       <EditingControl position="topright" editing={editing} onChoose={setEditing} />
       {editing && <EditingLayer id={editing} />}
-      {listLayers}
+      <ViewLayers />
     </LeafletMap>
   );
 };

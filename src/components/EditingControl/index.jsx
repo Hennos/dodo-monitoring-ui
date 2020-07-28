@@ -8,19 +8,15 @@ import { GET_LAYERS } from './requests';
 
 import './index.css';
 
-// const mapLayers = [
-//   {
-//     id: '1',
-//     name: 'tables'
-//   }
-// ];
-
 const EditingControl = ({ stylization, position, editing, onChoose }) => {
   const { data, loading, error } = useQuery(GET_LAYERS);
 
   if (loading || error) return null;
 
   const { mapLayers } = data;
+
+  if (mapLayers.length === 0) return null;
+
   return (
     <Control position={position}>
       <div className={classNames('editing-control', 'leaflet-control-layers', stylization)}>
