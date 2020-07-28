@@ -1,6 +1,6 @@
 {
   "name": "dodo-monitoring-ui-service",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "private": false,
   "dependencies": {
     "@apollo/react-components": "^3.1.5",
