@@ -7,7 +7,14 @@ import LayerTables from '../LayerTables';
 import { GET_LAYERS } from './requests';
 
 const layers = { TABLES: '1' };
-const viewLayers = new Map([[layers.TABLES, key => <LayerTables key={key} />]]);
+const viewLayers = new Map([
+  [
+    layers.TABLES,
+    {
+      factory: id => <LayerTables key={id} />
+    }
+  ]
+]);
 
 const ViewLayers = ({ editing }) => {
   const { data, loading, error } = useQuery(GET_LAYERS);
@@ -19,8 +26,8 @@ const ViewLayers = ({ editing }) => {
   return mapLayers
     .filter(({ id }) => id !== editing)
     .map(({ id }) => {
-      const { component = null } = viewLayers.get(id) || {};
-      return component;
+      const { factory = null } = viewLayers.get(id) || {};
+      return factory && factory(id);
     });
 };
 

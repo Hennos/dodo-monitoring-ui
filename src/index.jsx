@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
 
 import { ApolloLink, split } from 'apollo-link';
 import { HttpLink } from 'apollo-link-http';
@@ -13,11 +12,8 @@ import { onError } from 'apollo-link-error';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import registerServiceWorker from './registerServiceWorker';
-import buildStore from './store';
 
 import App from './components/App';
-
-const store = buildStore();
 
 const httpLink = new HttpLink({
   uri: `http://${window.location.hostname}:15031/graphql`
@@ -36,7 +32,7 @@ const link = ApolloLink.from([
       graphQLErrors.forEach(
         ({ message }) => console.error(`[GraphQL error]: ${message}`) //eslint-disable-line
       );
-    if (networkError) console.error(`[Network error]: ${networkError}`); //eslint-disable-line
+    if (networkError) console.error(`[Network error]: ${networkError.message}`); //eslint-disable-line
   }),
   split(
     ({ query }) => {
@@ -54,11 +50,9 @@ const client = new ApolloClient({
 });
 
 render(
-  <Provider store={store}>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
-  </Provider>,
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>,
   document.getElementById('interactiveMapRoot')
 );
 

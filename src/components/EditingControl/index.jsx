@@ -22,25 +22,27 @@ const EditingControl = ({ stylization, position, editing, onChoose }) => {
       <div className={classNames('editing-control', 'leaflet-control-layers', stylization)}>
         <p className="editing-control-title">Редактируемый слой</p>
         <ul className="editing-control-items">
-          {mapLayers.map(({ id, name }) => {
-            const isEditing = Object.is(id, editing);
-            return (
-              <button
-                key={id}
-                className="items-elem"
-                type="button"
-                onClick={() => onChoose(isEditing ? null : id)}
-              >
-                <input
-                  type="radio"
-                  checked={isEditing}
-                  readOnly
-                  className="leaflet-control-layers-selector"
-                />
-                <span className="items-elem-span">{name}</span>
-              </button>
-            );
-          })}
+          {mapLayers
+            .filter(({ name }) => name !== 'robots')
+            .map(({ id, name }) => {
+              const isEditing = Object.is(id, editing);
+              return (
+                <button
+                  key={id}
+                  className="items-elem"
+                  type="button"
+                  onClick={() => onChoose(isEditing ? null : id)}
+                >
+                  <input
+                    type="radio"
+                    checked={isEditing}
+                    readOnly
+                    className="leaflet-control-layers-selector"
+                  />
+                  <span className="items-elem-span">{name}</span>
+                </button>
+              );
+            })}
         </ul>
       </div>
     </Control>
