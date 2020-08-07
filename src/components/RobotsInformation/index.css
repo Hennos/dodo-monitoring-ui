@@ -1,0 +1,9 @@
+.robots-information {
+  width: 300px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  font-size: 12px;
+}

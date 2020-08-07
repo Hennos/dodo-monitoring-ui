@@ -8,6 +8,7 @@ import EditingControl from '../EditingControl';
 import EditingLayer from '../EditingLayer';
 import ViewLayers from '../ViewLayers';
 import LayerRobots from '../LayerRobots';
+import RobotsInformation from '../RobotsInformation';
 
 // #region Transformation & CRS
 function getFloorPlanTransformation({
@@ -97,6 +98,7 @@ const Map = () => {
         </BaseLayer>
       </LayersControl>
       <EditingControl position="topright" editing={editing} onChoose={setEditing} />
+      <RobotsInformation />
       {editing && <EditingLayer id={editing} />}
       <ViewLayers editing={editing} />
       <LayerRobots />

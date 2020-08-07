@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 const GET_ROBOT = gql`
   query GetRobot($id: ID!) {
     robot: getRobot(id: $id) {
+      id
       position
     }
   }
