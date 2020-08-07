@@ -47,17 +47,17 @@ const fromMeterToPixelPoint = point => FloorPlanTransformation.untransform(point
 
 const meterSizeFloorPlan = fromPixelToMeterPoint(sizeFloorPlan);
 const meterFloorPlanBounds = [
-  [meterSizeFloorPlan.x, 0],
-  [0, -meterSizeFloorPlan.y]
+  [0, meterSizeFloorPlan.x],
+  [-meterSizeFloorPlan.y, 0]
 ];
 
 L.Projection.RobotCoordinates = L.extend({}, L.CRS.LonLag, {
   project: point => {
-    return point ? fromMeterToPixelPoint(L.point(point.lat, point.lng)) : L.point(0, 0);
+    return point ? fromMeterToPixelPoint(L.point(point.lng, point.lat)) : L.point(0, 0);
   },
   unproject: point => {
     const meterPoint = fromPixelToMeterPoint(point);
-    return L.latLng([meterPoint.x, meterPoint.y]);
+    return L.latLng([meterPoint.y, meterPoint.x]);
   }
 });
 
@@ -69,7 +69,7 @@ L.CRS.Robot = L.extend({}, L.CRS.Simple, {
 const Map = () => {
   const [editing, setEditing] = useState(null);
 
-  const floorCenter = sizeFloorPlan.divideBy(2);
+  const floorCenter = meterSizeFloorPlan.divideBy(2);
 
   const { BaseLayer } = LayersControl;
   return (
@@ -98,7 +98,8 @@ const Map = () => {
       </LayersControl>
       <EditingControl position="topright" editing={editing} onChoose={setEditing} />
       {editing && <EditingLayer id={editing} />}
-      <ViewLayers />
+      <ViewLayers editing={editing} />
+      <LayerRobots />
     </LeafletMap>
   );
 };

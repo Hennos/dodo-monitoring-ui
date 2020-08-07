@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 const GET_LAYER = gql`
   query GetLayer($id: ID!) {
-    layer(id: $id) {
+    layer: getMapLayer(id: $id) {
       id
       name
       objects {
