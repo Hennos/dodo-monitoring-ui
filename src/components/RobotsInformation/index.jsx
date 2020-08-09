@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useQuery } from '@apollo/react-hooks';
 import Control from 'react-leaflet-control';
 
+import Button from '../Button';
 import RobotDescriptor from '../RobotDescriptor';
 
 import { GET_ROBOTS_LIST } from './requests';
@@ -20,12 +21,16 @@ const RobotsInformation = ({ position, stylization }) => {
   return (
     robots.length && (
       <Control position={position}>
-        <div className={classNames('editing-control', 'leaflet-control-layers', stylization)}>
-          <div className="robots-information">
-            {robots.map(({ id }) => (
-              <RobotDescriptor key={id} id={id} />
-            ))}
+        <div className={classNames('robots-information', 'leaflet-control-layers', stylization)}>
+          <div className="robot-info-title">
+            <span>Список платформ</span>
+            {/* <Button name="collapse" stylization="collapse-button">
+              <i className="fas fa-times" />
+            </Button> */}
           </div>
+          {robots.map(({ id }) => (
+            <RobotDescriptor key={id} id={id} stylization="description-row" />
+          ))}
         </div>
       </Control>
     )

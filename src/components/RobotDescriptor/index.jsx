@@ -1,28 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useQuery, useSubscription } from '@apollo/react-hooks';
 
-import Button from '../Button';
+import RobotTelemetry from '../RobotTelemetry';
 
 import { GET_ROBOT_TELEMETRY } from './requests';
 
 import './index.css';
 
-const controls = [
-  {
-    name: 'show',
-    icon: 'far fa-eye',
-    handler: () => {}
-  }
-  // {
-  //   name: 'openMenu',
-  //   icon: 'fas fa-ellipsis-h',
-  //   handler: () => {}
-  // }
-];
-
 const RobotDescriptor = ({ id, stylization }) => {
+  const [telemetry, showTelemetry] = useState(false);
   const { data, loading, error } = useQuery(GET_ROBOT_TELEMETRY, { variables: { id } });
 
   if (loading || error) return null;
@@ -31,14 +19,17 @@ const RobotDescriptor = ({ id, stylization }) => {
 
   return (
     <div className={classNames('robot-descriptor', stylization)}>
-      <p className="robot-title">
-        <span>{id}</span>
-        {controls.map(({ name, icon, handler }) => (
-          <Button key={name} name={name} stylization="control-button" onClick={handler}>
-            <i className={icon} />
-          </Button>
-        ))}
-      </p>
+      <div className="robot-title">
+        <div className="robot-marker">
+          <i className="fa fa-bullseye" />
+        </div>
+        <button className="details-link" type="button" onClick={() => showTelemetry(!telemetry)}>
+          {id}
+        </button>
+      </div>
+      {telemetry && (
+        <RobotTelemetry stylization="descriptor-telemetry" telemetry={robot.telemetry} />
+      )}
     </div>
   );
 };

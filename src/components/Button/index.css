@@ -1,4 +1,7 @@
 .custom-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .custom-button i {

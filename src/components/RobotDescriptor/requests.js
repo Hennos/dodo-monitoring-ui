@@ -5,6 +5,7 @@ const GET_ROBOT_TELEMETRY = gql`
     robot: getRobot(id: $id) {
       id
       name
+      telemetry
     }
   }
 `;

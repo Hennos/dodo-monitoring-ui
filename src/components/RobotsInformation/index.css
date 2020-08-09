@@ -1,9 +1,47 @@
 .robots-information {
+  color: #282828;
   width: 300px;
-  padding-top: 6px;
-  padding-bottom: 6px;
   display: flex;
   flex-direction: column;
-  background-color: white;
   font-size: 12px;
+  opacity: 50%;
+}
+
+.robots-information:hover {
+  opacity: 100%;
+}
+
+.robots-information .robot-info-title {
+  font-size: 14px;
+  position: relative;
+  width: 100%;
+  flex-grow: 0;
+  height: 26px;
+  display: flex;
+  align-items: center;
+}
+
+.robot-info-title > span {
+  padding-left: 10px;
+  padding-right: 4px;
+  margin-right: auto;
+}
+
+.robot-info-title .collapse-button {
+  color: #888888;
+  height: 26px;
+  width: 26px;
+}
+
+.robot-info-title .collapse-button i {
+  font-size: 16px;
+}
+
+.robot-info-title .collapse-button:hover {
+  cursor: pointer;
+  color: #484848;
+}
+
+.robots-information .description-row {
+  margin-bottom: 6px;
 }
