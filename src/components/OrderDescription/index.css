@@ -1,0 +1,23 @@
+.order-descriptor {
+  display: flex;
+  height: 26px;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.order-descriptor .order-number {
+}
+
+.order-descriptor .order-time {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.order-descriptor .order-status {
+  margin-left: auto;
+}
+
+.order-descriptor .order-processed {
+  margin-left: auto;
+}

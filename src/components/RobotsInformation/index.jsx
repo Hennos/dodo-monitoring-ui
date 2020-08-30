@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useQuery } from '@apollo/react-hooks';
@@ -12,6 +12,7 @@ import { GET_ROBOTS_LIST } from './requests';
 import './index.css';
 
 const RobotsInformation = ({ position, stylization }) => {
+  const [collapsed, setCollapse] = useState(false);
   const { data, loading, error } = useQuery(GET_ROBOTS_LIST);
 
   if (loading || error) return null;
@@ -19,21 +20,38 @@ const RobotsInformation = ({ position, stylization }) => {
   const { robots } = data;
 
   return (
-    robots.length && (
-      <Control position={position}>
-        <div className={classNames('robots-information', 'leaflet-control-layers', stylization)}>
-          <div className="robot-info-title">
-            <span>Список платформ</span>
-            {/* <Button name="collapse" stylization="collapse-button">
-              <i className="fas fa-times" />
-            </Button> */}
+    <Control position={position}>
+      <div className={classNames('robots-information leaflet-control-layers', stylization)}>
+        {collapsed ? (
+          <div className="robot-info-collapsed">
+            <div className="robot-info-title">
+              <span>Список платформ</span>
+              <Button name="open" stylization="control-button" onClick={() => setCollapse(false)}>
+                <i className="fas fa-chevron-down" />
+              </Button>
+            </div>
           </div>
-          {robots.map(({ id }) => (
-            <RobotDescriptor key={id} id={id} stylization="description-row" />
-          ))}
-        </div>
-      </Control>
-    )
+        ) : (
+          <div className="robot-info-full">
+            <div className="robot-info-title">
+              <span>Список платформ</span>
+              <Button name="close" stylization="control-button" onClick={() => setCollapse(true)}>
+                <i className="fas fa-times" />
+              </Button>
+            </div>
+            {robots.map(({ id, name, lastActivity }) => (
+              <RobotDescriptor
+                key={id}
+                id={id}
+                name={name}
+                lastActivity={lastActivity}
+                stylization="description-row"
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </Control>
   );
 };
 

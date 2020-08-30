@@ -5,6 +5,7 @@ const GET_ROBOTS_LIST = gql`
     robots: getRobots {
       id
       name
+      lastActivity
     }
   }
 `;

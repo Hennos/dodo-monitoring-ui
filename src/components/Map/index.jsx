@@ -9,6 +9,7 @@ import EditingLayer from '../EditingLayer';
 import ViewLayers from '../ViewLayers';
 import LayerRobots from '../LayerRobots';
 import RobotsInformation from '../RobotsInformation';
+import OrdersInformation from '../OrdersInformation';
 
 // #region Transformation & CRS
 function getFloorPlanTransformation({
@@ -33,7 +34,7 @@ function getFloorPlanTransformation({
 
 const sizeFloorPlan = L.point(1156, 826);
 const sizeRobotMap = L.point(640, 384);
-const pixelMeterRobotMap = 0.02;
+const pixelMeterRobotMap = 0.026;
 const robotMapOrigin = L.point(0, 0);
 
 const FloorPlanTransformation = getFloorPlanTransformation({
@@ -99,6 +100,7 @@ const Map = () => {
       </LayersControl>
       <EditingControl position="topright" editing={editing} onChoose={setEditing} />
       <RobotsInformation />
+      <OrdersInformation />
       {editing && <EditingLayer id={editing} />}
       <ViewLayers editing={editing} />
       <LayerRobots />

@@ -1,26 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useQuery, useSubscription } from '@apollo/react-hooks';
+import { useSubscription } from '@apollo/react-hooks';
 import L from 'leaflet';
 import { Marker } from 'react-leaflet';
 
-import { GET_ROBOT, SUBSCRIBE_ROBOT_POSITION } from './requests';
+import { SUBSCRIBE_ROBOT_POSITION } from './requests';
 
 import iconPosition from './position.svg';
 
 const ObjectRobot = ({ id }) => {
-  const { data: initialData, loading, error } = useQuery(GET_ROBOT, { variables: { id } });
+  const { data } = useSubscription(SUBSCRIBE_ROBOT_POSITION, { variables: { id } });
 
-  const { data: updatedData } = useSubscription(SUBSCRIBE_ROBOT_POSITION, {
-    variables: { id }
-  });
+  if (!data) return null;
 
-  if (loading || error) return null;
-
-  const robot = updatedData ? updatedData.robot : initialData.robot;
-
+  const { robot } = data;
   return (
     <Marker
+      id={robot.id}
       position={[robot.position.y, robot.position.x]}
       icon={L.icon({
         iconUrl: iconPosition,

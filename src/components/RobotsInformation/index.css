@@ -1,14 +1,15 @@
 .robots-information {
   color: #282828;
-  width: 300px;
   display: flex;
   flex-direction: column;
   font-size: 12px;
-  opacity: 50%;
 }
 
-.robots-information:hover {
-  opacity: 100%;
+.robots-information .robot-info-full {
+  width: 300px;
+}
+
+.robots-information .robot-info-collapsed {
 }
 
 .robots-information .robot-info-title {
@@ -23,25 +24,25 @@
 
 .robot-info-title > span {
   padding-left: 10px;
-  padding-right: 4px;
+  padding-right: 2px;
   margin-right: auto;
 }
 
-.robot-info-title .collapse-button {
+.robots-information .control-button {
   color: #888888;
   height: 26px;
   width: 26px;
 }
 
-.robot-info-title .collapse-button i {
+.robots-information .control-button i {
   font-size: 16px;
 }
 
-.robot-info-title .collapse-button:hover {
+.robots-information .control-button:hover {
   cursor: pointer;
   color: #484848;
 }
 
-.robots-information .description-row {
+.robot-info-full .description-row {
   margin-bottom: 6px;
 }

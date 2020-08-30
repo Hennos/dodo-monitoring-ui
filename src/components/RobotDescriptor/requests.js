@@ -1,13 +1,21 @@
 import gql from 'graphql-tag';
 
-const GET_ROBOT_TELEMETRY = gql`
-  query GetRobotTelemetry($id: ID!) {
-    robot: getRobot(id: $id) {
+// const SUBSCRIBE_ROBOT_TELEMETRY = gql`
+//   subscription SubscribeUpdateRobotPosition($id: ID!) {
+//     updatedRobot: updatedRobotPosition(id: $id) {
+//       id
+//       position
+//     }
+//   }
+// `;
+
+const SUBSCRIBE_ROBOT_POSITION = gql`
+  subscription SubscribeUpdateRobotPosition($id: ID!) {
+    robot: updatedRobotPosition(id: $id) {
       id
-      name
-      telemetry
+      position
     }
   }
 `;
 
-export { GET_ROBOT_TELEMETRY }; // eslint-disable-line
+export { SUBSCRIBE_ROBOT_POSITION }; // eslint-disable-line

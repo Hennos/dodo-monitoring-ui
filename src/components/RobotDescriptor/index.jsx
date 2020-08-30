@@ -1,45 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { useQuery, useSubscription } from '@apollo/react-hooks';
+import { useSubscription } from '@apollo/react-hooks';
 
 import RobotTelemetry from '../RobotTelemetry';
 
-import { GET_ROBOT_TELEMETRY } from './requests';
+import { SUBSCRIBE_ROBOT_POSITION } from './requests';
 
 import './index.css';
 
-const RobotDescriptor = ({ id, stylization }) => {
-  const [telemetry, showTelemetry] = useState(false);
-  const { data, loading, error } = useQuery(GET_ROBOT_TELEMETRY, { variables: { id } });
+const RobotDescriptor = ({ id, name, lastActivity, stylization }) => {
+  const [showTelemetry, setShowTelemetry] = useState(false);
 
-  if (loading || error) return null;
+  const { data } = useSubscription(SUBSCRIBE_ROBOT_POSITION, { variables: { id } });
 
-  const { robot } = data;
+  const position = data ? data.robot.position : null;
 
+  const telemetry = useMemo(() => ({ lastActivity, position }), [lastActivity, position]);
   return (
     <div className={classNames('robot-descriptor', stylization)}>
       <div className="robot-title">
         <div className="robot-marker">
           <i className="fa fa-bullseye" />
         </div>
-        <button className="details-link" type="button" onClick={() => showTelemetry(!telemetry)}>
-          {id}
+        <button
+          className="details-link"
+          type="button"
+          onClick={() => setShowTelemetry(!showTelemetry)}
+        >
+          {name}
         </button>
       </div>
-      {telemetry && (
-        <RobotTelemetry stylization="descriptor-telemetry" telemetry={robot.telemetry} />
-      )}
+      {showTelemetry && <RobotTelemetry stylization="descriptor-telemetry" telemetry={telemetry} />}
     </div>
   );
 };
 
 RobotDescriptor.propTypes = {
   id: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  lastActivity: PropTypes.string,
   stylization: PropTypes.string
 };
 
 RobotDescriptor.defaultProps = {
+  name: 'robot-platform',
+  lastActivity: null,
   stylization: ''
 };
 
