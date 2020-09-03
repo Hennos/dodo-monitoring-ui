@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSubscription } from '@apollo/react-hooks';
+import { useQuery, useSubscription } from '@apollo/client';
 import L from 'leaflet';
 import { Marker } from 'react-leaflet';
 

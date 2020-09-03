@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 
 const SUBSCRIBE_ROBOT_POSITION = gql`
   subscription SubscribeUpdateRobotPosition($id: ID!) {

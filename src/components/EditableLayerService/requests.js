@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 
 const CREATE_OBJECT = gql`
   mutation CreateObject($id: ID!, $object: JSON!) {

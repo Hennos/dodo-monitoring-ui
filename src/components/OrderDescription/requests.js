@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 
 const GET_ORDER_DESCRIPTION = gql`
   query GetOrderDescription($id: ID!) {
