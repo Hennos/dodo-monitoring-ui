@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery, useSubscription } from '@apollo/react-hooks';
+import { useQuery, useSubscription } from '@apollo/client';
 import L from 'leaflet';
 import { FeatureGroup, Polygon } from 'react-leaflet';
 
