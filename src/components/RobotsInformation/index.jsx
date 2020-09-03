@@ -39,14 +39,8 @@ const RobotsInformation = ({ position, stylization }) => {
                 <i className="fas fa-times" />
               </Button>
             </div>
-            {robots.map(({ id, name, lastActivity }) => (
-              <RobotDescriptor
-                key={id}
-                id={id}
-                name={name}
-                lastActivity={lastActivity}
-                stylization="description-row"
-              />
+            {robots.map(({ id }) => (
+              <RobotDescriptor key={id} id={id} stylization="description-row" />
             ))}
           </div>
         )}

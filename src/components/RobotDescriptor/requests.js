@@ -1,13 +1,16 @@
 import { gql } from '@apollo/client';
 
-// const SUBSCRIBE_ROBOT_TELEMETRY = gql`
-//   subscription SubscribeUpdateRobotPosition($id: ID!) {
-//     updatedRobot: updatedRobotPosition(id: $id) {
-//       id
-//       position
-//     }
-//   }
-// `;
+const GET_ROBOT_DESCRIPTION = gql`
+  query GetRobotDescription($id: ID!) {
+    robot: getRobot(id: $id) {
+      id
+      name
+      position
+      lastActivity
+      markerColor @client
+    }
+  }
+`;
 
 const SUBSCRIBE_ROBOT_POSITION = gql`
   subscription SubscribeUpdateRobotPosition($id: ID!) {
@@ -18,4 +21,4 @@ const SUBSCRIBE_ROBOT_POSITION = gql`
   }
 `;
 
-export { SUBSCRIBE_ROBOT_POSITION }; // eslint-disable-line
+export { GET_ROBOT_DESCRIPTION, SUBSCRIBE_ROBOT_POSITION }; // eslint-disable-line

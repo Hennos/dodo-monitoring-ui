@@ -5,47 +5,50 @@ import { useQuery, useSubscription } from '@apollo/client';
 
 import RobotTelemetry from '../RobotTelemetry';
 
-import { SUBSCRIBE_ROBOT_POSITION } from './requests';
+import { GET_ROBOT_DESCRIPTION, SUBSCRIBE_ROBOT_POSITION } from './requests';
 
 import './index.css';
 
-const RobotDescriptor = ({ id, name, lastActivity, stylization }) => {
+const RobotDescriptor = ({ id, stylization }) => {
   const [showTelemetry, setShowTelemetry] = useState(false);
 
-  const { data } = useSubscription(SUBSCRIBE_ROBOT_POSITION, { variables: { id } });
+  const { data, loading, error } = useQuery(GET_ROBOT_DESCRIPTION, { variables: { id } });
 
-  const position = data ? data.robot.position : null;
+  if (loading || error) return null;
 
-  const telemetry = useMemo(() => ({ lastActivity, position }), [lastActivity, position]);
+  // const { data } = useSubscription(SUBSCRIBE_ROBOT_POSITION, { variables: { id } });
+
+  const { robot } = data;
   return (
     <div className={classNames('robot-descriptor', stylization)}>
       <div className="robot-title">
         <div className="robot-marker">
-          <i className="fa fa-bullseye" />
+          <i className="fa fa-bullseye" style={{ color: robot.markerColor }} />
         </div>
         <button
           className="details-link"
           type="button"
           onClick={() => setShowTelemetry(!showTelemetry)}
         >
-          {name}
+          {robot.name}
         </button>
       </div>
-      {showTelemetry && <RobotTelemetry stylization="descriptor-telemetry" telemetry={telemetry} />}
+      {showTelemetry && (
+        <RobotTelemetry
+          stylization="descriptor-telemetry"
+          telemetry={{ lastActivity: robot.lastActivity, position: robot.position }}
+        />
+      )}
     </div>
   );
 };
 
 RobotDescriptor.propTypes = {
   id: PropTypes.string.isRequired,
-  name: PropTypes.string,
-  lastActivity: PropTypes.string,
   stylization: PropTypes.string
 };
 
 RobotDescriptor.defaultProps = {
-  name: 'robot-platform',
-  lastActivity: null,
   stylization: ''
 };
 
