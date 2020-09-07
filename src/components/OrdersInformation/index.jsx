@@ -31,7 +31,7 @@ const OrdersInformation = ({ position, stylization }) => {
   if (result.loading || result.error) return null;
 
   const orders = result.data.orders
-    .map((order, index) => ({ ...order, number: index }))
+    .map((order, index) => ({ ...order, number: index + 1 }))
     .reverse()
     .slice(0, 10);
   return (

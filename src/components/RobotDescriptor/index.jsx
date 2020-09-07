@@ -1,55 +1,61 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { useQuery, useSubscription } from '@apollo/client';
 
 import RobotTelemetry from '../RobotTelemetry';
 
-import { GET_ROBOT_DESCRIPTION, SUBSCRIBE_ROBOT_POSITION } from './requests';
-
 import './index.css';
 
-const RobotDescriptor = ({ id, stylization }) => {
+const RobotDescriptor = ({
+  stylization,
+  name,
+  lastActivity,
+  position,
+  markerColor,
+  subToUpdate
+}) => {
   const [showTelemetry, setShowTelemetry] = useState(false);
 
-  const { data, loading, error } = useQuery(GET_ROBOT_DESCRIPTION, { variables: { id } });
+  useEffect(() => {
+    subToUpdate();
+  }, [subToUpdate]);
 
-  if (loading || error) return null;
-
-  // const { data } = useSubscription(SUBSCRIBE_ROBOT_POSITION, { variables: { id } });
-
-  const { robot } = data;
   return (
     <div className={classNames('robot-descriptor', stylization)}>
       <div className="robot-title">
         <div className="robot-marker">
-          <i className="fa fa-bullseye" style={{ color: robot.markerColor }} />
+          <i className="fa fa-bullseye" style={{ color: markerColor }} />
         </div>
         <button
           className="details-link"
           type="button"
           onClick={() => setShowTelemetry(!showTelemetry)}
         >
-          {robot.name}
+          {name}
         </button>
       </div>
       {showTelemetry && (
-        <RobotTelemetry
-          stylization="descriptor-telemetry"
-          telemetry={{ lastActivity: robot.lastActivity, position: robot.position }}
-        />
+        <RobotTelemetry stylization="descriptor-telemetry" telemetry={{ lastActivity, position }} />
       )}
     </div>
   );
 };
 
 RobotDescriptor.propTypes = {
-  id: PropTypes.string.isRequired,
-  stylization: PropTypes.string
+  subToUpdate: PropTypes.func.isRequired,
+  stylization: PropTypes.string,
+  name: PropTypes.string,
+  lastActivity: PropTypes.string,
+  position: PropTypes.arrayOf(PropTypes.number),
+  markerColor: PropTypes.string
 };
 
 RobotDescriptor.defaultProps = {
-  stylization: ''
+  stylization: '',
+  name: 'unknown-vehicle',
+  lastActivity: null,
+  position: null,
+  markerColor: 'grey'
 };
 
 export default RobotDescriptor;

@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/client';
 import Control from 'react-leaflet-control';
 
 import Button from '../Button';
-import RobotDescriptor from '../RobotDescriptor';
+import RobotDescriptorWithData from '../RobotDescriptorWithData';
 
 import { GET_ROBOTS_LIST } from './requests';
 
@@ -40,7 +40,7 @@ const RobotsInformation = ({ position, stylization }) => {
               </Button>
             </div>
             {robots.map(({ id }) => (
-              <RobotDescriptor key={id} id={id} stylization="description-row" />
+              <RobotDescriptorWithData key={id} id={id} stylization="description-row" />
             ))}
           </div>
         )}

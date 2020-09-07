@@ -1,0 +1,27 @@
+.editing-tables-control {
+  line-height: 26px;
+  height: 26px;
+  font-size: 12px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.editing-tables-control > .control-button {
+  color: #b1b1b1;
+  width: 100%;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.editing-tables-control > .control-button:hover {
+  cursor: pointer;
+}
+
+.control-button > span {
+  color: #282828;
+  padding-right: 6px;
+}
+
+.control-button > .control-icon-focus {
+  color: #6f6f6f;
+}

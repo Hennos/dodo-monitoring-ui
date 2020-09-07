@@ -1,108 +1,34 @@
-import React, { useState } from 'react';
-import L from 'leaflet';
-import { Map as LeafletMap, ImageOverlay, LayersControl } from 'react-leaflet';
+import React from 'react';
+import { Map as LeafletMap, ImageOverlay } from 'react-leaflet';
 
-import './index.css';
-
-import EditingControl from '../EditingControl';
-import EditingLayer from '../EditingLayer';
-import ViewLayers from '../ViewLayers';
+import TablesEditingControl from '../TablesEditingControl';
+import LayerTables from '../LayerTables';
 import LayerRobots from '../LayerRobots';
 import RobotsInformation from '../RobotsInformation';
 import OrdersInformation from '../OrdersInformation';
 
-// #region Transformation & CRS
-function getFloorPlanTransformation({
-  sizeRobotMap,
-  sizeFloorPlan,
-  robotMapOrigin,
-  pixelMeterRobotMap
-}) {
-  const meterCoordinatesScale = sizeRobotMap
-    .unscaleBy(sizeFloorPlan)
-    .multiplyBy(pixelMeterRobotMap);
-  return new L.Transformation(
-    meterCoordinatesScale.x,
-    robotMapOrigin.x,
-    meterCoordinatesScale.y,
-    robotMapOrigin.y
-  );
-}
+import createMapConfiguration from './projection';
 
-// const floorHeight = 826;
-// const floorWidth = 1156;
+import './index.css';
 
-const sizeFloorPlan = L.point(1156, 826);
-const sizeRobotMap = L.point(640, 384);
-const pixelMeterRobotMap = 0.026;
-const robotMapOrigin = L.point(0, 0);
-
-const FloorPlanTransformation = getFloorPlanTransformation({
-  sizeFloorPlan,
-  sizeRobotMap,
-  robotMapOrigin,
-  pixelMeterRobotMap
-});
-
-const fromPixelToMeterPoint = point => FloorPlanTransformation.transform(point);
-const fromMeterToPixelPoint = point => FloorPlanTransformation.untransform(point);
-
-const meterSizeFloorPlan = fromPixelToMeterPoint(sizeFloorPlan);
-const meterFloorPlanBounds = [
-  [0, meterSizeFloorPlan.x],
-  [-meterSizeFloorPlan.y, 0]
-];
-
-L.Projection.RobotCoordinates = L.extend({}, L.CRS.LonLag, {
-  project: point => {
-    return point ? fromMeterToPixelPoint(L.point(point.lng, point.lat)) : L.point(0, 0);
-  },
-  unproject: point => {
-    const meterPoint = fromPixelToMeterPoint(point);
-    return L.latLng([meterPoint.y, meterPoint.x]);
-  }
-});
-
-L.CRS.Robot = L.extend({}, L.CRS.Simple, {
-  projection: L.Projection.RobotCoordinates
-});
-// #endregion
+const { bounds, crs, center } = createMapConfiguration(2, [608, 384], [-10, 9], 0.05);
 
 const Map = () => {
-  const [editing, setEditing] = useState(null);
-
-  const floorCenter = meterSizeFloorPlan.divideBy(2);
-
-  const { BaseLayer } = LayersControl;
   return (
     <LeafletMap
       id="root-map"
-      maxBounds={meterFloorPlanBounds}
-      center={floorCenter}
+      maxBounds={bounds}
+      center={center}
       zoom={0}
       zoomControl={false}
-      crs={L.CRS.Robot}
+      crs={crs}
       useFlyTo
     >
-      <LayersControl position="topright" collapsed={false}>
-        <BaseLayer checked name="План помещения">
-          <ImageOverlay
-            url={`http://${window.location.hostname}:15032/floor.jpg`}
-            bounds={meterFloorPlanBounds}
-          />
-        </BaseLayer>
-        <BaseLayer name="Карта робота">
-          <ImageOverlay
-            url={`http://${window.location.hostname}:15032/robot.jpg`}
-            bounds={meterFloorPlanBounds}
-          />
-        </BaseLayer>
-      </LayersControl>
-      <EditingControl position="topright" editing={editing} onChoose={setEditing} />
-      <RobotsInformation />
-      <OrdersInformation />
-      {editing && <EditingLayer id={editing} />}
-      <ViewLayers editing={editing} />
+      <ImageOverlay url={`http://${window.location.hostname}:15032/robot.jpg`} bounds={bounds} />
+      <TablesEditingControl position="topright" />
+      <RobotsInformation position="topleft" />
+      <OrdersInformation position="topleft" />
+      <LayerTables />
       <LayerRobots />
     </LeafletMap>
   );

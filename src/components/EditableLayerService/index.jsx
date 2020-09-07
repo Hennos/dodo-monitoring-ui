@@ -73,7 +73,8 @@ const optionsType = {
 EditableLayerService.propTypes = {
   layer: PropTypes.string.isRequired,
   options: PropTypes.shape(optionsType).isRequired,
-  children: PropTypes.arrayOf(PropTypes.element).isRequired
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element])
+    .isRequired
 };
 
 export default EditableLayerService;

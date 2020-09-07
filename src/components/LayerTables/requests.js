@@ -1,29 +1,9 @@
 import { gql } from '@apollo/client';
 
-const GET_LAYER = gql`
-  query GetLayer($id: ID!) {
-    layer: getMapLayer(id: $id) {
-      id
-      name
-      objects {
-        id
-        data
-      }
-    }
+const GET_TABLES_EDITING_STATUS = gql`
+  query GetTablesEditingStatus {
+    editing: tablesEditingStatus @client
   }
 `;
 
-const SUBSCRIBE_LAYER_UPDATE = gql`
-  subscription SubscribeLayerUpdate($id: ID!) {
-    layer: layerChanged(id: $id) {
-      id
-      name
-      objects {
-        id
-        data
-      }
-    }
-  }
-`;
-
-export { GET_LAYER, SUBSCRIBE_LAYER_UPDATE }; // eslint-disable-line
+export { GET_TABLES_EDITING_STATUS }; // eslint-disable-line

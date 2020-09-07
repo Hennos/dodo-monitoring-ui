@@ -15,7 +15,7 @@ const SUBSCRIBE_ROBOT_POSITION = gql`
     robot: updatedRobotPosition(id: $id) {
       id
       position
-      color @client
+      markerColor @client
     }
   }
 `;

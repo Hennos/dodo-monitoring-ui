@@ -1,4 +1,4 @@
-import { InMemoryCache } from '@apollo/client/cache';
+import { InMemoryCache, makeVar } from '@apollo/client/cache';
 
 const getMarkerColor = (() => {
   const colors = [
@@ -14,24 +14,37 @@ const getMarkerColor = (() => {
   ];
   const markers = {};
   return id => {
+    if (!id) return null;
+
     if (!markers[id]) markers[id] = colors.pop();
 
     return markers[id];
   };
 })();
 
-const cache = {
+const tablesEditingStatus = makeVar(false);
+
+const cache = new InMemoryCache({
   typePolicies: {
+    Query: {
+      fields: {
+        tablesEditingStatus: {
+          read() {
+            return tablesEditingStatus();
+          }
+        }
+      }
+    },
     Robot: {
       fields: {
         markerColor: {
-          read(_, { variables: { id } }) {
-            return getMarkerColor(id) || 'grey';
+          read: (_, options) => {
+            return getMarkerColor(options.variables.id) || 'grey';
           }
         }
       }
     }
   }
-};
+});
 
-export default new InMemoryCache(cache);
+export { cache, tablesEditingStatus };
