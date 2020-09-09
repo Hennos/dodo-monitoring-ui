@@ -1,7 +1,7 @@
 import L from 'leaflet';
 
 function getTransformation({ scale, origin, ratio }) {
-  return new L.Transformation(ratio / scale, origin.x, -ratio / scale, origin.y);
+  return new L.Transformation(ratio / scale, origin.x, ratio / scale, origin.y);
 }
 
 function configurate(mapScale, mapSize, mapOrigin, pixelMeterRatio) {
@@ -14,17 +14,15 @@ function configurate(mapScale, mapSize, mapOrigin, pixelMeterRatio) {
   const toMeterPoint = point => transformation.transform(point);
   const toPixelPoint = point => transformation.untransform(point);
 
-  const appMapSize = toMeterPoint(mapSize.multiplyBy(mapScale));
-  const meterMapOrigin = toMeterPoint(L.point(0, 0));
+  const meterMapSize = toMeterPoint(mapSize);
+  const topLeftAnglePoint = [-meterMapSize.x / 2, -meterMapSize.y / 2];
+  const bottomRightAnglePoint = [meterMapSize.y / 2, meterMapSize.y / 2];
 
-  const bounds = [
-    [meterMapOrigin.y, meterMapOrigin.x],
-    [appMapSize.y, appMapSize.x]
-  ];
+  const bounds = [topLeftAnglePoint, bottomRightAnglePoint];
 
   const projection = L.extend({}, L.CRS.LonLag, {
     project: point => {
-      return point ? toPixelPoint(L.point(point.lng, -point.lat)) : L.point(0, 0);
+      return point ? toPixelPoint(L.point(point.lng, point.lat)) : L.point(0, 0);
     },
     unproject: point => {
       const meterPoint = toMeterPoint(point);
@@ -34,9 +32,7 @@ function configurate(mapScale, mapSize, mapOrigin, pixelMeterRatio) {
 
   const crs = L.extend({}, L.CRS.Simple, { projection });
 
-  const center = appMapSize.divideBy(2);
-
-  return { projection, crs, bounds, center };
+  return { projection, crs, bounds };
 }
 
 export default function(mapScale, mapSize, mapOrigin, pixelMeterRatio) {

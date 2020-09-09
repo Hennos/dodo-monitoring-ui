@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map as LeafletMap, ImageOverlay } from 'react-leaflet';
+import { Map as LeafletMap, ImageOverlay, ZoomControl } from 'react-leaflet';
 
 import TablesEditingControl from '../TablesEditingControl';
 import LayerTables from '../LayerTables';
@@ -11,20 +11,14 @@ import createMapConfiguration from './projection';
 
 import './index.css';
 
-const { bounds, crs, center } = createMapConfiguration(2, [608, 384], [-10, 9], 0.05);
+const { bounds: mapBounds, crs } = createMapConfiguration(1, [1600, 1600], [0, 0], 0.05);
 
 const Map = () => {
+  const center = [0, 0];
   return (
-    <LeafletMap
-      id="root-map"
-      maxBounds={bounds}
-      center={center}
-      zoom={0}
-      zoomControl={false}
-      crs={crs}
-      useFlyTo
-    >
-      <ImageOverlay url={`http://${window.location.hostname}:15032/robot.jpg`} bounds={bounds} />
+    <LeafletMap id="root-map" center={center} zoom={0} crs={crs} zoomControl={false} useFlyTo>
+      <ImageOverlay url="http://95.181.230.223:15032/robot.jpg" bounds={mapBounds} />
+      <ZoomControl position="bottomright" />
       <TablesEditingControl position="topright" />
       <RobotsInformation position="topleft" />
       <OrdersInformation position="topleft" />
