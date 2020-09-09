@@ -10,13 +10,11 @@ const EditingTables = ({ children }) => {
       layer="1"
       options={{
         draw: {
-          rectangle: {
-            showRadius: false
-          },
+          polygon: true,
+          rectangle: false,
           polyline: false,
           circle: false,
           circlemarker: false,
-          polygon: false,
           marker: false
         },
         collapsed: false
