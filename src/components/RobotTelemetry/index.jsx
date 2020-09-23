@@ -11,9 +11,11 @@ const RobotTelemetry = ({ stylization, telemetry }) => (
     {telemetry.battery && (
       <li className="telemetry-row">{`Заряд батареи: ${telemetry.battery}`}</li>
     )}
-    {telemetry.position && (
-      <li className="telemetry-row">{`Текущая позиция: ${telemetry.position.x} ${telemetry.position.y}`}</li>
-    )}
+    <li className="telemetry-row">
+      {telemetry.position
+        ? `Текущая позиция: x = ${telemetry.position.x}, y = ${telemetry.position.y}`
+        : 'Текущая позиция неизвестна'}
+    </li>
     {telemetry.lastActivity && (
       <li className="telemetry-row">{`Был активен: ${telemetry.lastActivity}`}</li>
     )}

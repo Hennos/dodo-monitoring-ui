@@ -5,6 +5,7 @@ const GET_ORDER_DESCRIPTION = gql`
     order: getOrder(id: $id) {
       id
       status
+      time
       processed
     }
   }
@@ -15,6 +16,7 @@ const SUBSCRIBE_ORDER_STATUS = gql`
     order: orderStatusChanged(id: $id) {
       id
       status
+      time
       processed
     }
   }

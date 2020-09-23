@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 
-import ObjectRobot from '../ObjectRobot';
+import ObjectRobotWithData from '../ObjectRobotWithData';
 
 import { GET_ROBOTS } from './requests';
 
@@ -12,7 +12,7 @@ const LayerRobots = () => {
 
   const { robots } = data;
 
-  return robots.map(({ id }) => <ObjectRobot key={id} id={id} />);
+  return robots.map(({ id }) => <ObjectRobotWithData key={id} id={id} />);
 };
 
 export default LayerRobots;

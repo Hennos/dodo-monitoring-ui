@@ -24,6 +24,7 @@
   padding-left: 10px;
   padding-right: 2px;
   margin-right: auto;
+  cursor: default;
 }
 
 .orders-information .control-button {
@@ -53,6 +54,7 @@
 }
 
 .orders-description-list .description-row {
+  height: 26px;
 }
 
 .orders-description-list .description-row:nth-child(odd) {

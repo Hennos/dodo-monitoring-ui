@@ -5,6 +5,8 @@ import { useMutation } from '@apollo/client';
 import { FeatureGroup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 
+// import { tablesEditingStatus as setEditingStatus } from '../../apollo/cache';
+
 import { CREATE_OBJECT, UPDATE_OBJECTS, REMOVE_OBJECTS } from './requests';
 
 const EditableLayerService = ({ layer, options: { draw, edit }, children }) => {
@@ -19,6 +21,7 @@ const EditableLayerService = ({ layer, options: { draw, edit }, children }) => {
         object: created.toGeoJSON()
       }
     });
+    // setEditingStatus(false);
   }
 
   function onEditObjects(edited) {
@@ -35,6 +38,7 @@ const EditableLayerService = ({ layer, options: { draw, edit }, children }) => {
         objects
       }
     });
+    // setEditingStatus(false);
   }
 
   function onRemoveObjects(removed) {
@@ -48,6 +52,7 @@ const EditableLayerService = ({ layer, options: { draw, edit }, children }) => {
         objects
       }
     });
+    // setEditingStatus(false);
   }
 
   return (
@@ -73,7 +78,8 @@ const optionsType = {
 EditableLayerService.propTypes = {
   layer: PropTypes.string.isRequired,
   options: PropTypes.shape(optionsType).isRequired,
-  children: PropTypes.arrayOf(PropTypes.element).isRequired
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element])
+    .isRequired
 };
 
 export default EditableLayerService;
