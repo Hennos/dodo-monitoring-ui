@@ -56,7 +56,9 @@ const OrdersInformation = ({ position, stylization }) => {
             </div>
             <div className="orders-description-list">
               {orders.map(({ id, number }) => (
-                <OrderDescription key={id} id={id} number={number} stylization="description-row" />
+                <div key={id} className="description-row">
+                  <OrderDescription id={id} number={number} />
+                </div>
               ))}
             </div>
           </div>

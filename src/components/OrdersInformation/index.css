@@ -54,6 +54,7 @@
 }
 
 .orders-description-list .description-row {
+  height: 26px;
 }
 
 .orders-description-list .description-row:nth-child(odd) {
