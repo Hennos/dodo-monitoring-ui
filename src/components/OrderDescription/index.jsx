@@ -51,7 +51,7 @@ const OrderDescription = ({ stylization, id, number }) => {
   return (
     <div className={classNames('order-descriptor', stylization)}>
       <div className="order-number">{number}</div>
-      <div className="order-time">19:38:24</div>
+      <div className="order-time">{order.time}</div>
       <div className="order-status">{order.status && statusMessages.get(order.status)}</div>
     </div>
   );
