@@ -26,6 +26,7 @@
   padding-left: 10px;
   padding-right: 2px;
   margin-right: auto;
+  cursor: default;
 }
 
 .robots-information .control-button {
