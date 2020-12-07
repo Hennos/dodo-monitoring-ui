@@ -23,16 +23,21 @@ const getMarkerColor = (() => {
 })();
 
 const tablesEditingStatus = makeVar(false);
+// const activeOperatorId = makeVar(null);
+// const activeOperatorRole = makeVar(null);
+// const activeRoomId = makeVar(null);
+const activeOperatorId = makeVar('1');
+const activeOperatorRole = makeVar('master');
+const activeRoomId = makeVar('1');
 
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        tablesEditingStatus: {
-          read() {
-            return tablesEditingStatus();
-          }
-        }
+        tablesEditingStatus: { read: () => tablesEditingStatus() },
+        activeOperatorId: { read: () => activeOperatorId() },
+        activeOperatorRole: { read: () => activeOperatorRole() },
+        activeRoomId: { read: () => activeRoomId() }
       }
     },
     Robot: {
@@ -47,4 +52,4 @@ const cache = new InMemoryCache({
   }
 });
 
-export { cache, tablesEditingStatus };
+export { cache, tablesEditingStatus, activeOperatorId, activeOperatorRole, activeRoomId };
