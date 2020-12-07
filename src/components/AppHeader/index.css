@@ -1,0 +1,12 @@
+.app-header-info {
+  display: flex;
+  align-items: center;
+  background-color: rgb(140, 140, 150);
+  border-bottom: 1px solid rgb(110, 110, 120);
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.app-header-info > .app-user-status {
+  margin-left: auto;
+}

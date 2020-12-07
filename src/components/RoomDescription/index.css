@@ -1,0 +1,17 @@
+.room-description {
+  display: flex;
+  align-items: center;
+  height: 26px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 12px;
+}
+
+.room-description > .room-status {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: rgb(87, 175, 127);
+  margin-right: 6px;
+}

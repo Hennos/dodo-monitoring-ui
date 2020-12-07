@@ -1,0 +1,35 @@
+.rooms-panel {
+  width: 280px;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.rooms-panel > .panel-title {
+  position: relative;
+  color: rgb(60, 60, 60);
+  width: 100%;
+  height: 26px;
+  line-height: 26px;
+  padding-left: 6px;
+  padding-right: 6px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+}
+
+.rooms-panel > .rooms-list {
+  height: 300px;
+  overflow-y: auto;
+  margin: 6px 4px 4px 4px;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-bottom: 4px;
+}
+
+.rooms-list > .room-row {
+}
+
+.rooms-list > .room-row:hover {
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  border-bottom: none;
+}

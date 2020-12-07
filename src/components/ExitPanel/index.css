@@ -1,0 +1,59 @@
+.exit-panel {
+  position: relative;
+}
+
+.exit-panel > .exit-panel-switch {
+  height: 30px;
+  width: 30px;
+  color: rgb(140, 140, 150);
+  font-size: 14px;
+  border-radius: 100%;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+  background-color: white;
+}
+
+.exit-panel > .exit-panel-switch-show {
+  color: #484848;
+}
+
+.exit-panel > .exit-panel-switch:hover {
+  cursor: pointer;
+  color: #484848;
+}
+
+.exit-panel > .exit-panel-options {
+  position: absolute;
+  font-size: 14px;
+  top: 34px;
+  right: 0px;
+  width: 160px;
+
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+}
+
+.exit-panel-options > .room-options-list {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgb(180, 180, 180);
+}
+
+.exit-panel-options > .user-options-list {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.exit-panel-options .row-option {
+  width: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+  text-align: left;
+  height: 22px;
+  line-height: 22px;
+}
+
+.exit-panel-options .row-option:hover {
+  cursor: pointer;
+  background-color: #e7e7e7;
+}

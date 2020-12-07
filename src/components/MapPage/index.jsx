@@ -5,7 +5,7 @@ import { GET_ROBOT_MAP_CONFIG } from './requests';
 
 import Map from '../Map';
 
-const MapWithConfig = ({ ...props }) => {
+const MapPage = ({ ...props }) => {
   const { data, loading, error } = useQuery(GET_ROBOT_MAP_CONFIG);
 
   if (loading || error) return null;
@@ -14,4 +14,4 @@ const MapWithConfig = ({ ...props }) => {
   return config && <Map {...props} config={config} />;
 };
 
-export default MapWithConfig;
+export default MapPage;
