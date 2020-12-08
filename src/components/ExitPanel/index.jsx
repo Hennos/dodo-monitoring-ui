@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import { useQuery } from '@apollo/client';
-// import { useMutation } from '@apollo/client';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -37,6 +36,7 @@ const ExitPanel = ({ stylization }) => {
                 stylization="row-option"
                 onClick={() => {
                   activeRoomId(null);
+                  setViewOptions(false);
                 }}
               >
                 Выйти из комнаты
@@ -51,6 +51,7 @@ const ExitPanel = ({ stylization }) => {
                   activeOperatorId(null);
                   activeOperatorRole(null);
                   activeRoomId(null);
+                  setViewOptions(false);
                 }}
               >
                 Выйти
