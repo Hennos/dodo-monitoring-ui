@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import DataOperatorStatus from '../DataOperatorStatus';
+import Loading from '../Loading';
 
 import './index.css';
 
@@ -17,7 +18,7 @@ const ActiveOperatorStatus = ({ id, role, stylization }) => (
             {role === 'master' && <span className="fas fa-crown active-status-icon" />}
           </>
         ) : (
-          <span>Получение...</span>
+          <Loading />
         )
       }
     </DataOperatorStatus>

@@ -1,9 +1,9 @@
 .user-status {
   display: flex;
+  font-size: 14px;
 }
 
 .user-status > .user-status-badge {
-  font-size: 14px;
   height: 30px;
   border-radius: 15px;
   line-height: 30px;
@@ -12,10 +12,23 @@
   background-color: white;
 }
 
-.user-status > .user-status-badge:last-of-type {
-  margin-right: 0;
-}
-
 .user-status > .user-status-badge:hover {
   cursor: pointer;
+}
+
+.user-status > .user-status-exit-button {
+  font-size: 16px;
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: rgb(140, 140, 150);
+  border-radius: 100%;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+  background-color: white;
+}
+
+.user-status > .user-status-exit-button:hover {
+  cursor: pointer;
+  color: #484848;
 }
