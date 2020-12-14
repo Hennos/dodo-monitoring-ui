@@ -6,7 +6,7 @@ import ObjectRobot from '../ObjectRobot';
 
 import { GET_ROBOT_WITH_POSITION, SUBSCRIBE_ROBOT_POSITION } from './requests';
 
-const ObjectRobotWithData = ({ id, ...props }) => {
+const ObjectRobotWithData = ({ id }) => {
   const { subscribeToMore, ...result } = useQuery(GET_ROBOT_WITH_POSITION, { variables: { id } });
 
   if (result.loading || result.error) return null;
@@ -15,8 +15,7 @@ const ObjectRobotWithData = ({ id, ...props }) => {
   return (
     robot.position && (
       <ObjectRobot
-        {...props}
-        {...robot}
+        robot={robot}
         subToUpdate={() => {
           subscribeToMore({
             document: SUBSCRIBE_ROBOT_POSITION,

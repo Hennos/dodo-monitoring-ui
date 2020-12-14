@@ -13,7 +13,7 @@ import createMapConfiguration from './projection';
 import './index.css';
 
 const Map = ({ config: { width, height, scale } }) => {
-  const center = [0, 0];
+  const center = useMemo(() => [0, 0], []);
 
   const { bounds: mapBounds, crs } = useMemo(
     () => createMapConfiguration(1, [width, height], center, scale),

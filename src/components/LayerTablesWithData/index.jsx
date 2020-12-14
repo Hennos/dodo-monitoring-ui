@@ -12,13 +12,10 @@ const LayerTablesWithData = ({ update }) => {
 
   if (initialResult.loading || initialResult.error) return null;
 
-  const { layer } = initialResult.data;
-  if (update && updatedResult.data) {
-    const updatedLayer = updatedResult.data.layer || layer;
-    return <Tables {...updatedLayer} />;
-  }
+  const { objects: loadedTables } =
+    update && updatedResult.data ? updatedResult.data.layer : initialResult.data;
 
-  return <Tables {...layer} />;
+  return <Tables objects={loadedTables} />;
 };
 
 LayerTablesWithData.propTypes = {

@@ -5,13 +5,13 @@ import { GET_ROBOT_MAP_CONFIG } from './requests';
 
 import Map from '../Map';
 
-const MapPage = ({ ...props }) => {
+const MapPage = () => {
   const { data, loading, error } = useQuery(GET_ROBOT_MAP_CONFIG);
 
   if (loading || error) return null;
 
   const { config } = data;
-  return config && <Map {...props} config={config} />;
+  return config && <Map config={config} />;
 };
 
 export default MapPage;

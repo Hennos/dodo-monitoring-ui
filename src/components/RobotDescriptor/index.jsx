@@ -6,20 +6,14 @@ import RobotTelemetry from '../RobotTelemetry';
 
 import './index.css';
 
-const RobotDescriptor = ({
-  stylization,
-  name,
-  lastActivity,
-  position,
-  markerColor,
-  subToUpdate
-}) => {
+const RobotDescriptor = ({ stylization, robot, subToUpdate }) => {
   const [showTelemetry, setShowTelemetry] = useState(false);
 
   useEffect(() => {
     subToUpdate();
   }, [subToUpdate]);
 
+  const { name, lastActivity, position, markerColor } = robot;
   return (
     <div className={classNames('robot-descriptor', stylization)}>
       <div className="robot-title">
@@ -44,18 +38,17 @@ const RobotDescriptor = ({
 RobotDescriptor.propTypes = {
   subToUpdate: PropTypes.func.isRequired,
   stylization: PropTypes.string,
-  name: PropTypes.string,
-  lastActivity: PropTypes.string,
-  position: PropTypes.arrayOf(PropTypes.number),
-  markerColor: PropTypes.string
+  robot: PropTypes.shape({
+    name: PropTypes.string,
+    lastActivity: PropTypes.string,
+    position: PropTypes.arrayOf(PropTypes.number),
+    markerColor: PropTypes.string
+  })
 };
 
 RobotDescriptor.defaultProps = {
   stylization: '',
-  name: 'unknown-vehicle',
-  lastActivity: null,
-  position: null,
-  markerColor: 'grey'
+  robot: {}
 };
 
 export default RobotDescriptor;

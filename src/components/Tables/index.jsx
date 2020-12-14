@@ -23,7 +23,7 @@ Tables.propTypes = {
   objects: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      data: PropTypes.object
+      data: PropTypes.shape({})
     })
   ),
   subToUpdate: PropTypes.func

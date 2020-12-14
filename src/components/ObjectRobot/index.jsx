@@ -5,7 +5,7 @@ import { Marker } from 'react-leaflet';
 
 import './index.css';
 
-const ObjectRobot = ({ position, markerColor }) => (
+const ObjectRobot = ({ robot: { position, markerColor } }) => (
   <Marker
     position={[position.y, position.x]}
     icon={L.divIcon({
@@ -16,15 +16,17 @@ const ObjectRobot = ({ position, markerColor }) => (
 );
 
 ObjectRobot.propTypes = {
-  position: PropTypes.shape({
-    x: PropTypes.string.isRequired,
-    y: PropTypes.string.isRequired
-  }).isRequired,
-  markerColor: PropTypes.string
+  robot: PropTypes.shape({
+    position: PropTypes.shape({
+      x: PropTypes.string.isRequired,
+      y: PropTypes.string.isRequired
+    }),
+    markerColor: PropTypes.string
+  })
 };
 
 ObjectRobot.defaultProps = {
-  markerColor: 'grey'
+  robot: {}
 };
 
 export default ObjectRobot;
