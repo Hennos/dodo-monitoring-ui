@@ -1,6 +1,6 @@
 {
   "name": "dodo-monitoring-ui-service",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "private": false,
   "dependencies": {
     "@apollo/client": "^3.1.4",
