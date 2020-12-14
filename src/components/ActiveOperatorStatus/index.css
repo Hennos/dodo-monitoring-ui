@@ -1,8 +1,8 @@
 .active-operator-status {
   text-align: center;
   min-width: 100px;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .active-operator-status span {

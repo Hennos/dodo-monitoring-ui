@@ -6,7 +6,7 @@ import RobotDescriptor from '../RobotDescriptor';
 
 import { GET_ROBOT_DESCRIPTION, SUBSCRIBE_ROBOT_POSITION } from './requests';
 
-const RobotDescriptorWithData = ({ id, ...props }) => {
+const RobotDescriptorWithData = ({ id, stylization }) => {
   const { subscribeToMore, ...result } = useQuery(GET_ROBOT_DESCRIPTION, { variables: { id } });
 
   if (result.loading || result.error) return null;
@@ -14,8 +14,8 @@ const RobotDescriptorWithData = ({ id, ...props }) => {
   const { robot } = result.data;
   return (
     <RobotDescriptor
-      {...props}
-      {...robot}
+      stylization={stylization}
+      robot={robot}
       subToUpdate={() => {
         subscribeToMore({
           document: SUBSCRIBE_ROBOT_POSITION,
@@ -34,7 +34,12 @@ const RobotDescriptorWithData = ({ id, ...props }) => {
 };
 
 RobotDescriptorWithData.propTypes = {
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
+  stylization: PropTypes.string
+};
+
+RobotDescriptorWithData.defaultProps = {
+  stylization: ''
 };
 
 export default RobotDescriptorWithData;

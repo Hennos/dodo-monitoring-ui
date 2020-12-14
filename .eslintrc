@@ -1,8 +1,10 @@
 {
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb", "airbnb/hooks", "prettier", "prettier/react"],
   "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": ["error"],
+    "no-use-before-define": 0,
+    "react/jsx-curly-newline": 0
   },
   "parser": "babel-eslint",
   "env": {

@@ -35,11 +35,11 @@ function configurate(mapScale, mapSize, mapOrigin, pixelMeterRatio) {
   return { projection, crs, bounds };
 }
 
-export default function(mapScale, mapSize, mapOrigin, pixelMeterRatio) {
+export default (mapScale, mapSize, mapOrigin, pixelMeterRatio) => {
   return configurate(
     mapScale,
     L.point(mapSize[0], mapSize[1]),
     L.point(mapOrigin[0], mapOrigin[1]),
     pixelMeterRatio
   );
-}
+};
