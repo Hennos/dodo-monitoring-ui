@@ -13,7 +13,7 @@ const LayerTablesWithData = ({ update }) => {
   if (initialResult.loading || initialResult.error) return null;
 
   const { objects: loadedTables } =
-    update && updatedResult.data ? updatedResult.data.layer : initialResult.data;
+    update && updatedResult.data ? updatedResult.data.layer : initialResult.data.layer;
 
   return <Tables objects={loadedTables} />;
 };
