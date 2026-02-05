@@ -14,7 +14,7 @@
     "react-leaflet": "^2.7.0",
     "react-leaflet-control": "^2.1.1",
     "react-leaflet-draw": "^0.19.0",
-    "react-scripts": "^4.0.1",
+    "react-scripts": "^5.0.1",
     "subscriptions-transport-ws": "^0.9.18"
   },
   "scripts": {
@@ -34,7 +34,7 @@
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "^22.14.1",
+    "eslint-plugin-jest": "^29.12.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.21.5",
